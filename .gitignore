@@ -1,0 +1,10 @@
+.idea
+.ipynb_checkpoints
+@
+datasets/REDD
+datasets/MotionSense
+datasets/hipotese1-recurrenceplot-vggembedding/**/*.png
+datasets/hipotese1-recurrenceplot-vggembedding/**/*.npy
+benchmarkings/Imaging-NILM-time-series/datasets/
+nilmtk-repo/
+nilmtk/
