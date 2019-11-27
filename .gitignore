@@ -5,6 +5,9 @@ datasets/REDD
 datasets/MotionSense
 datasets/hipotese1-recurrenceplot-vggembedding/**/*.png
 datasets/hipotese1-recurrenceplot-vggembedding/**/*.npy
+datasets/phd
+models/
+paper_anderson/
 benchmarkings/Imaging-NILM-time-series/datasets/
 nilmtk-repo/
 nilmtk/
