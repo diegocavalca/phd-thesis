@@ -7,7 +7,7 @@ astroid==2.1.0
 attrs==19.1.0
 Babel==2.7.0
 backcall==0.1.0
-bleach==3.1.0
+bleach==3.1.2
 Bottleneck==1.2.1
 certifi==2019.6.16
 cffi==1.12.3
