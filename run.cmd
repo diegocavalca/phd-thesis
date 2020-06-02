@@ -1,1 +1,1 @@
-conda activate doutorado & jupyter notebook
+conda activate doutorado & jupyter notebook --allow-root
