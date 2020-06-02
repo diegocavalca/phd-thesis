@@ -11,3 +11,5 @@ paper_anderson/
 benchmarkings/Imaging-NILM-time-series/datasets/
 nilmtk-repo/
 nilmtk/
+nilm_metadata-latest/*
+nilmtk-latest/*
