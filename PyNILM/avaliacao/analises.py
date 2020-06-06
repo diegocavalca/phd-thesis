@@ -111,6 +111,13 @@ def relatorio_classificacao_aparelho(modelo, X_teste, y_teste, label=None, camin
         if not os.path.isdir(caminho_persistencia):
             os.makedirs(caminho_persistencia)
 
+        # Persistindo resultados
+        df_metrics.to_csv(
+            os.path.join(caminho_persistencia, "resultados_analise.csv"),
+            encoding="UTF-8",
+            index=False
+        )
+
     print("")
     print("* Matriz de Confusão (Estados 0/1 - OFF/ON):")
     plotar_matriz_confusao(y_teste, y_pred,
