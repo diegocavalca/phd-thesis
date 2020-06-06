@@ -76,33 +76,40 @@ class Janelas:
             # Encaixando medicao dentro do tamanho de janelas (p/ fazer reshape)
             power = power.values[:limite_serie]
 
-            # Dividindo em janelas
-            series = power.reshape(-1, tamanho_janela)
+            # Gerando máscara de status (ativo ou não), considerando ruido da carga
+            # ou rede na medição (threshod)
+            status = power > e.on_power_threshold()
+
+            # Dividindo em janelas (tanto energia, quanto estados)
+            windows_series = power.reshape(-1, tamanho_janela)
+            windows_status = status.reshape(-1, tamanho_janela)
 
             # Remover nan (por zero)
-            series = np.nan_to_num(series)
+            windows_series = np.nan_to_num(windows_series)
 
             # Calcular rotulos a partir das janelas
             # Podendo ser:
             #   - `estado` (denotando carga ATIVA [1] ou INATIVA [0]);
             #   - `total`(soma da janela);
             #   - `media`;
-            total = np.sum(series, axis=1)
             rotulos = {
-                "total": total,
-                "media": np.mean(series, axis=1),
-                "estado": np.where(total > 0, 1, 0)
+                "total": np.sum(windows_series, axis=1),
+                "media": np.mean(windows_series, axis=1),
+                "estado": np.where(
+                    np.sum(windows_status, axis=1) > 0, 1, 0
+                )  # Estado de cada janela, baseado na pré-avaliação da serie
+                # completa, considerando ruido
             }
 
             # Consolidar objeto da carga
             dados_carga.append({
                 "carga": aparelho,
                 "instancia": e.instance(),
-                "janelas": series,
+                "janelas": windows_series,
                 "rotulos": rotulos
             })
 
-            if self.debug: print(f"{aparelho} -> {series.shape}")
+            if self.debug: print(f"{aparelho} -> {windows_series.shape}")
 
         self.dados_carga = dados_carga
 
