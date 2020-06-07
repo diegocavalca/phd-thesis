@@ -41,7 +41,8 @@ class Janelas:
         # Lista de dicionarios com informacoes de janelas por carga
         dados_carga = []
 
-        tamanho_janela = int(intervalo_medicao / taxa_amostral)
+        #tamanho_janela = int(intervalo_medicao / taxa_amostral) # Desuso: assumia janela em funcao da taxa
+        tamanho_janela = intervalo_medicao
 
         # # Calculando tamanho máximo da série (padding, dependendo tamanho janeka)
         # series = self.residencia.elec.mains() \
