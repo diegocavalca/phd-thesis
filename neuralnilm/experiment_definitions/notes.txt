@@ -1,2 +1,0 @@
-576 & 575:
-Note that these used *LINEAR* layers by mistake!  Oops!
