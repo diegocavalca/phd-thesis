@@ -16,3 +16,6 @@ nilmtk-latest/*
 neuralnilm/*
 nilmtk-latest/*
 logs/*
+image_classifier/*
+nilm_metadata-latest/*
+nilmtk-latest/*
