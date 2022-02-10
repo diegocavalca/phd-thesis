@@ -148,7 +148,7 @@ style==1.1.0
 tables==3.5.2
 tb-nightly==1.14.0a20190603
 tensorboard==1.14.0
-tensorflow==2.0.0b1
+tensorflow==2.5.3
 tensorflow-estimator==1.14.0
 tensorflow-gpu==2.0.0b1
 termcolor==1.1.0
