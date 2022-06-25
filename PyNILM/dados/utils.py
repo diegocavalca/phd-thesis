@@ -96,23 +96,18 @@ def carregar_dados_aparelho(janelas, instancia, aparelho, taxa, tamanho_janela,
     split_teste=None, eliminar_janelas_vazias=False, debug=False):
 
     # Extrair series divididas em janelas para cada medidor
-    dados_cargas = janelas.preparar(
+    janelas.preparar(
         taxa_amostral=taxa, 
-        intervalo_medicao=tamanho_janela
+        intervalo_medicao=tamanho_janela,
+        # debug=debug
     )
     print()
 
     # Pprearando dados (Serie / Estado)
     # X
-    dados_medidores = janelas.filtrar_cargas(
-        dados_cargas,
-        filtros=[
-            (1, 'site_meter'),
-            (2, 'site_meter'),    
-        ]
-    )
+    dados_medidores = janelas.filtrar(filtros=janelas.listar_medidores())
     
-    dados_aparelho = janelas.filtrar_cargas(dados_cargas, filtros=[(instancia, aparelho)])[0]
+    dados_aparelho = janelas.filtrar(filtros=[(instancia, aparelho)])[0]
     
     # Validar tamanho dos dados de medidores (podem ter mais registros que os aparelhos)
     janela_media_medidores = int(np.sum([len(d["janelas"])for d in dados_medidores])/len(dados_medidores))
@@ -130,7 +125,11 @@ def carregar_dados_aparelho(janelas, instancia, aparelho, taxa, tamanho_janela,
                 removidos += 1
     
     # Estruturando dados modelagem (X e y)
-    X = dados_medidores[0]["janelas"] + dados_medidores[1]["janelas"]
+    try:
+        X = sum([dm["janelas"] for dm in dados_medidores])
+    except Exception as e:
+        print("Erro ao combinar medidores:", str(e))
+        X = dados_medidores[0]["janelas"]
 
     # Selecionando apenas janelas VALIDAS (ocorrencia de ao menos 1 carga)
     # TODO: Implementar na biblioteca esta rotina de validacao

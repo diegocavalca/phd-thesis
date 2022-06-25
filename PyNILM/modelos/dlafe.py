@@ -85,7 +85,7 @@ class DLAFE:
         # Seq to RP image
         recurrence_plots = self.seq_to_rp(X)
         # Image preprocessing
-        return self.preprocess_input(recurrence_plots)
+        return self.preprocess_input(recurrence_plots).astype(self.data_type) # TODO: avaliar impacto na precisao
     
     def feature_extraction(self, X):
         # Seq -> RP -> Preproc TL
